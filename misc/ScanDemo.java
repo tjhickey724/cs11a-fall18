@@ -8,7 +8,7 @@ public class ScanDemo {
 
   public static void readLineFromConsole(){
     Scanner scan = new Scanner(System.in);
-    System.out.print("Enter a String, an int, and a double: ");
+    System.out.print("Enter a word, an int, and a double: ");
     String s = scan.next();
     int x = scan.nextInt();
     double y = scan.nextDouble();
