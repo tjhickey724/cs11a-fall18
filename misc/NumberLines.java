@@ -9,10 +9,11 @@ public class NumberLines {
             System.out.print("Enter the file name with extension : ");
             // first create a scanner to read from the console, System.in
             Scanner console = new Scanner(System.in);
-            File filename = new File(console.nextLine());
+            String fileName = console.nextLine();
+            File file = new File(fileName);
 
             // next create a scanner to read from the file
-            Scanner fileScanner = new Scanner(filename);
+            Scanner fileScanner = new Scanner(file);
 
             // now read the entire file and print it with line numbers:
             int counter=1;
