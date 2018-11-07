@@ -31,23 +31,48 @@ import com.google.gson.Gson;
 public class APIdemo {
 
 	public static void main(String[] args) {
-    //getURL(args);
-    Weather w = getWeather("Boston,us");
-    System.out.printf("windspeed = %f%n",w.wind.speed);
-    System.out.printf("%n%n%nHere is the temperature%n%n");
-    System.out.printf("t=%s  w=%s%n",w.main.temp,w.weather.get(0).description);
-
+    getWeatherByZip(args);
   }
 
-  public static void getURL(String[] args){
-    String data = callURL(args[0]);
-		System.out.printf("%nOutput: %n >>>>>%n%s%n%n",data);
-	}
+  /**
+  the makes a call to openweathermap.com to get the weather data
+  for the specified zipcode and the prints the info on the screen
+  */
+  public static void getWeatherByZip(String[] args){
+    String zipcode = "02453";
+    if (args.length == 1){
+      zipcode = args[0];
+    }
+    Weather w = getWeather(zipcode);
+
+    System.out.printf("%n%n%nHere is the weather info for %s%n",zipcode);
+    System.out.printf("temperature=%s  weather=%s%n",
+      k2f(w.main.temp),
+      w.weather.get(0).description);
+    System.out.printf("windspeed = %f%n%n",
+      w.wind.speed);
+  }
+
+
+  /**
+  This gets the weather for a given zipcode...
+  */
+  public static Weather getWeather(String zipcode){
+    //String apiKey = "b6907d289e10d714a6e88b30761fae22";
+    String apiKey = "06d70799a9fcdfb5cffd48536349e502";
+    String url = "https://api.openweathermap.org/data/2.5/weather?zip="+zipcode+",us"+"&appid="+apiKey;
+    String json = getStringFromURL(url);
+    Gson g = new Gson();
+    Weather w = g.fromJson(json,Weather.class);
+    return w;
+    }
 
 
 
-	public static String callURL(String myURL) {
-		System.out.println("Requeted URL:" + myURL);
+  /**
+  This is a method which will connect to a website and return the content as a string.
+  */
+	public static String getStringFromURL(String myURL) {
 		StringBuilder sb = new StringBuilder();
 		URLConnection urlConn = null;
 		InputStreamReader in = null;
@@ -76,25 +101,12 @@ public class APIdemo {
 		return sb.toString();
 	}
 
+  public static double k2c(double k){
+    return k-273.15;
+  }
 
-  //    String json=
-  // {'main':{'temp':270,'humidity':81,'pressure':1012},
-  //  'wind':{'speed':4.1,'deg':80}
-  // }
-  public static Weather getWeather(String city){
-    String url = "https://samples.openweathermap.org/data/2.5/weather?q="+city+"&appid=b6907d289e10d714a6e88b30761fae22";
-    String json = callURL(url);
-    //String json= "{'main':{'temp':270,'humidity':81,'pressure':1012},'wind':{'speed':4.1,'deg':80}}";
-    Gson g = new Gson();
-    Weather w = g.fromJson(json,Weather.class);
-    //Data data = new Gson().fromJson(json, Data.class);
-    // then we need to parse the JSON into GSON object w and pull out
-    // w.weather.description
-    // w.main.temp w.main.pressure w.main.humidity
-    // w.wind.speed w.wind.deg
-    //System.out.printf("%n%n%nHere is the temperature%n%n");
-    //System.out.printf("t=%s  w=%s%n",w.main.temp,w.weather.get(0).description);
-    return w;
+  public static double k2f(double k){
+    return k2c(k)*9/5+32;
   }
 
 }
