@@ -9,6 +9,12 @@ import java.nio.charset.Charset;
 This is code modified from
 https://crunchify.com/java-url-example-getting-text-from-url/
 
+You need to download the gson classes from
+https://search.maven.org/artifact/com.google.code.gson/gson/2.8.5/jar
+and unzip it in the same folder as the APIdemo.java before compiling..
+
+You also need an API key ...
+
 Good example is with the weather API at
 https://openweathermap.org/current
 here's an example ...
@@ -29,7 +35,11 @@ public class APIdemo {
 
 	public static void main(String[] args) {
     //getURL(args);
-    getWeather();
+    Weather w = getWeather("Boston,us");
+    System.out.printf("windspeed = %f%n",w.wind.speed);
+    System.out.printf("%n%n%nHere is the temperature%n%n");
+    System.out.printf("t=%s  w=%s%n",w.main.temp,w.weather.get(0).description);
+
   }
 
   public static void getURL(String[] args){
@@ -74,8 +84,8 @@ public class APIdemo {
   // {'main':{'temp':270,'humidity':81,'pressure':1012},
   //  'wind':{'speed':4.1,'deg':80}
   // }
-  public static void getWeather(){
-    String url = "https://samples.openweathermap.org/data/2.5/weather?q=Boston,us&appid=b6907d289e10d714a6e88b30761fae22";
+  public static Weather getWeather(String city){
+    String url = "https://samples.openweathermap.org/data/2.5/weather?q="+city+"&appid=b6907d289e10d714a6e88b30761fae22";
     String json = callURL(url);
     //String json= "{'main':{'temp':270,'humidity':81,'pressure':1012},'wind':{'speed':4.1,'deg':80}}";
     Gson g = new Gson();
@@ -85,32 +95,9 @@ public class APIdemo {
     // w.weather.description
     // w.main.temp w.main.pressure w.main.humidity
     // w.wind.speed w.wind.deg
-    System.out.printf("%n%n%nHere is the temperature%n%n");
-    System.out.printf("t=%s  w=%s%n",w.main.temp,w.weather.get(0).description);
-
+    //System.out.printf("%n%n%nHere is the temperature%n%n");
+    //System.out.printf("t=%s  w=%s%n",w.main.temp,w.weather.get(0).description);
+    return w;
   }
 
-}
-
-
-class Weather{
-  MainJson main;
-  WindJson wind;
-  List<WeatherJson> weather;
-}
-
-class MainJson {
-  double temp;
-  double humidity;
-  double pressure;
-}
-
-class WindJson {
-  double speed;
-  double deg;
-}
-
-class WeatherJson {
-  String description;
-  String main;
 }
