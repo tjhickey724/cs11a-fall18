@@ -74,7 +74,11 @@ public class APIdemo {
 
 
   /**
-  This is a method which will connect to a website and return the content as a string.
+  * This is a method which will connect to a website and return the content as a string.
+  * You can get information about time in different timezones by connecting
+  * to the URL http://worldtimeapi.org/api/, e.g.
+  * myURL="http://worldtimeapi.org/api/timezones/America/New_York.txt"
+  * gives info about the current time in New York
   */
 	public static String getStringFromURL(String myURL) {
 		StringBuilder sb = new StringBuilder();
