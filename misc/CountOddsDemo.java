@@ -17,5 +17,13 @@ public class CountOddsDemo{
     return counter;
   }
 
+  public static int sum(int[] data){
+    int s=0;
+    for(int i=0;i<data.length;i++){
+       s=s+data[i];
+    }
+    return s;
+  }
+
 
 }
