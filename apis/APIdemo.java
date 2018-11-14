@@ -50,12 +50,11 @@ public class APIdemo {
     }
     Weather w = getWeather(zipcode);
 
-    System.out.printf("%n%n%nHere is the weather info for %s%n",zipcode);
-    System.out.printf("temperature=%s  weather=%s%n",
-      k2f(w.main.temp),
-      w.weather.get(0).description);
-    System.out.printf("windspeed = %f%n%n",
-      w.wind.speed);
+    System.out.printf("Here is the weather info for %s%n%n",zipcode);
+    System.out.printf("The current temperature is %.1f F ",k2f(w.main.temp));
+    System.out.printf(" with %s %n",w.weather.get(0).description);
+    System.out.printf(" and a wind speed of %.1f mph ", w.wind.speed);
+    System.out.printf(" from direction %.1f degrees%n%n", w.wind.deg);
   }
 
 
