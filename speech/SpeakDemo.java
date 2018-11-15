@@ -26,12 +26,8 @@ public class SpeakDemo{
     if (response.equals("yes")){
       playMP3("Typing.mp3");
     }
-    pause(2000);
 
-    response = promptForInput("Do you want to hear some Japanese? (yes or no)");
-    if (response.equals("yes")) {
-      sayHelloInJapanese();
-    }
+    pause(2000);
   }
 
   /**
@@ -47,15 +43,6 @@ public class SpeakDemo{
     return response;
   }
 
-  /**
-  * uses Google Speech API to say konichi-wa from the hiragana unicode string
-  * here are the languages it recognizes
-  * https://cloud.google.com/text-to-speech/docs/voices
-  */
-  public static void sayHelloInJapanese() {
-    String[] data2 = {"JA","こにちわ"};
-    SimpleTTS.main(data2);
-  }
 
   /**
   * This will play an MP3 file.
