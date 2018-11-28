@@ -26,9 +26,9 @@ public class SpeakDemo{
     if (response.equals("yes")){
       playMP3("Typing.mp3");
     }
-    pause(2000);
 
     SimpleTTS.say("Goodbye!");
+    pause(2000);
   }
 
   /**
