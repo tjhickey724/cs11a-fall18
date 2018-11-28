@@ -1,11 +1,12 @@
 public class StaticArrayDemo {
-  public static final int SIZE=5;
+  public static final int SIZE=7;
   public static int[] data = new int[SIZE];
 
   public static void main(String[] args){
     initData(); // notice we aren't passing a parameter or receiving a values
     printData();
   }
+
   public static void initData(){
     data[0]=1;
     data[SIZE-1]=1;

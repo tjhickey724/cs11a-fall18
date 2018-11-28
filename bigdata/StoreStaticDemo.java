@@ -18,7 +18,14 @@ public class StoreStaticDemo {
   public static void main(String[] args){
     readStaticData();
     writeStaticData();
+    int m = numMuffins();
+    System.out.printf("There were %d muffins%n",m);
   }
+
+  public static int numMuffins(){
+    //you write this code ...
+  }
+
 
   public static void readStaticData(){
     //Date,Time,Transaction,Item
